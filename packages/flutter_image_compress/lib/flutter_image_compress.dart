@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'dart:typed_data' as typed_data;
 
-import 'package:flutter/services.dart';
 import 'package:flutter_image_compress_platform_interface/flutter_image_compress_platform_interface.dart';
-export 'package:flutter_image_compress_platform_interface/flutter_image_compress_platform_interface.dart';
 
 /// Image Compress plugin.
 ///
@@ -27,8 +25,7 @@ export 'package:flutter_image_compress_platform_interface/flutter_image_compress
 /// Compress image will remove its EXIF info. and the result is in jpeg format.
 /// Rotation is also supported.
 class FlutterImageCompress {
-  static FlutterImageCompressPlatform get _platform =>
-      FlutterImageCompressPlatform.instance;
+  static FlutterImageCompressPlatform get _platform => FlutterImageCompressPlatform.instance;
 
   static FlutterImageCompressValidator get validator => _platform.validator;
 

@@ -6,6 +6,8 @@ import 'dart:math' as math;
 import 'dart:typed_data' as typed_data;
 import 'dart:ui' as ui;
 
+import 'package:flutter_image_compress_platform_interface/flutter_image_compress_platform_interface.dart';
+
 import '../button.dart';
 import 'package:flutter/material.dart' hide TextButton;
 import 'package:flutter/services.dart';
@@ -279,8 +281,7 @@ class _MyAppState extends State<MyApp> {
     print('start compress webp');
     final quality = 90;
     final tmpDir = (await getTemporaryDirectory()).path;
-    final target =
-        '$tmpDir/${DateTime.now().millisecondsSinceEpoch}-$quality.webp';
+    final target = '$tmpDir/${DateTime.now().millisecondsSinceEpoch}-$quality.webp';
     final srcPath = await getExampleFilePath();
     final result = await FlutterImageCompress.compressAndGetFile(
       srcPath,
@@ -441,9 +442,7 @@ extension _StateExtension on State {
   /// [setState] when it's not building, then wait until next frame built.
   FutureOr<void> safeSetState(FutureOr<dynamic> Function() fn) async {
     await fn();
-    if (mounted &&
-        !context.debugDoingBuild &&
-        context.owner?.debugBuilding == false) {
+    if (mounted && !context.debugDoingBuild && context.owner?.debugBuilding == false) {
       // ignore: invalid_use_of_protected_member
       setState(() {});
     }
@@ -465,16 +464,14 @@ class XFileImageProvider extends ImageProvider<XFileImageProvider> {
     return this;
   }
 
-  Future<ui.Codec> _loadAsync(
-      XFileImageProvider key, DecoderBufferCallback decode) async {
+  Future<ui.Codec> _loadAsync(XFileImageProvider key, DecoderBufferCallback decode) async {
     final bytes = await file.readAsBytes();
     final buffer = await ui.ImmutableBuffer.fromUint8List(bytes);
     return decode(buffer);
   }
 
   @override
-  ImageStreamCompleter loadBuffer(
-      XFileImageProvider key, DecoderBufferCallback decode) {
+  ImageStreamCompleter loadBuffer(XFileImageProvider key, DecoderBufferCallback decode) {
     return MultiFrameImageStreamCompleter(
       codec: _loadAsync(key, decode),
       scale: 1.0,

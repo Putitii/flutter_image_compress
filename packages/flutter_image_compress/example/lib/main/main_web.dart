@@ -5,6 +5,7 @@ import 'dart:typed_data' as typed_data;
 import 'package:flutter/material.dart' hide TextButton;
 import 'package:flutter/services.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:flutter_image_compress_platform_interface/flutter_image_compress_platform_interface.dart';
 
 import '../button.dart';
 import '../const/resource.dart';
@@ -93,9 +94,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<Uint8List?> _compressList() async {
-    final bytes = await rootBundle
-        .load(R.IMG_IMG_JPG)
-        .then((value) => value.buffer.asUint8List());
+    final bytes = await rootBundle.load(R.IMG_IMG_JPG).then((value) => value.buffer.asUint8List());
     return FlutterImageCompress.compressWithList(
       bytes,
       minWidth: 400,
@@ -104,9 +103,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<Uint8List?> _compressPNG() async {
-    final bytes = await rootBundle
-        .load(R.IMG_HEADER_PNG)
-        .then((value) => value.buffer.asUint8List());
+    final bytes = await rootBundle.load(R.IMG_HEADER_PNG).then((value) => value.buffer.asUint8List());
     return FlutterImageCompress.compressWithList(
       bytes,
       minWidth: 400,
@@ -156,9 +153,7 @@ extension _StateExtension on State {
   /// [setState] when it's not building, then wait until next frame built.
   FutureOr<void> safeSetState(FutureOr<dynamic> Function() fn) async {
     await fn();
-    if (mounted &&
-        !context.debugDoingBuild &&
-        context.owner?.debugBuilding == false) {
+    if (mounted && !context.debugDoingBuild && context.owner?.debugBuilding == false) {
       // ignore: invalid_use_of_protected_member
       setState(() {});
     }

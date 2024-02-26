@@ -34,8 +34,7 @@ class FlutterImageCompressCommon extends FlutterImageCompressPlatform {
 
   @override
   FlutterImageCompressValidator get validator => _validator;
-  final FlutterImageCompressValidator _validator =
-      FlutterImageCompressValidator(_channel);
+  final FlutterImageCompressValidator _validator = FlutterImageCompressValidator(_channel);
 
   /// For flutter plugin registration.
   static void registerWith() {

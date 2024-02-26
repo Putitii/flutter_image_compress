@@ -68,9 +68,7 @@ class FlutterImageCompressMacos extends FlutterImageCompressPlatform {
   }) async {
     await checkSupport(format);
 
-    final bytes = await rootBundle
-        .load(assetName)
-        .then((value) => value.buffer.asUint8List());
+    final bytes = await rootBundle.load(assetName).then((value) => value.buffer.asUint8List());
 
     return compressWithList(
       bytes,
@@ -132,7 +130,7 @@ class FlutterImageCompressMacos extends FlutterImageCompressPlatform {
     bool keepExif = false,
   }) async {
     await checkSupport(format);
-    
+
     final result = await _channel.invokeMethod<Uint8List>('compressWithList', {
       'list': image,
       'minWidth': minWidth,
@@ -159,8 +157,7 @@ class FlutterImageCompressMacos extends FlutterImageCompressPlatform {
 
   @override
   FlutterImageCompressValidator get validator => _validator;
-  final FlutterImageCompressValidator _validator =
-      MacOSFlutterImageCompressValidator(_channel);
+  final FlutterImageCompressValidator _validator = MacOSFlutterImageCompressValidator(_channel);
 
   @override
   void ignoreCheckSupportPlatform(bool value) {
