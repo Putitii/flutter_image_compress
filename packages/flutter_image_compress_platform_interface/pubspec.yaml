@@ -1,6 +1,6 @@
 name: flutter_image_compress_platform_interface
 description: The platform interface of flutter_image_compress.
-repository: https://github.com/Putitii/flutter_image_compress
+repository: https://github.com/fluttercandies/flutter_image_compress
 version: 1.0.3
 
 environment:
